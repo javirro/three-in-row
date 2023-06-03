@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react'
 import Card from '../components/Card'
+import CONSTANT from '../constants'
 import '../styles/main.css'
 
 const Main = () => {
-  const [turn, setTurn] = useState("player1")
+  const [turn, setTurn] = useState(CONSTANT.player1)
   const [isChosen, setIsChosen] = useState([false, false, false])
   const [allTokenUsed, setAllTokenUsed] = useState({ player1: 0, player2: 0 })
   const [positions, setPositions] = useState(new Map())
+  // Map formed with:
+  // key: Position in the MAP (1 - 9)
+  // Value: Object { player, tokenToMove (1-3)}
 
   const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
   const chooseOne = (number) => {
     const newChosen = [false, false, false]
     newChosen[number - 1] = true
@@ -28,17 +33,17 @@ const Main = () => {
           <button
             className={`card-button left ${isChosen[0] ? "chosen" : ""} `}
             onClick={() => chooseOne(1)}
-            disabled={turn !== "player1" || (allTokenUsed["player1"] > 0 && allTokenUsed["player1"] < 3)}> 1 </button>
+            disabled={turn !== CONSTANT.player1 || (allTokenUsed[CONSTANT.player1] > 0 && allTokenUsed[CONSTANT.player1] < 3)}> 1 </button>
 
-          {allTokenUsed["player1"] > 0 && <button
+          {allTokenUsed[CONSTANT.player1] > 0 && <button
             className={`card-button left ${isChosen[1] ? "chosen" : ""} `}
             onClick={() => chooseOne(2)}
-            disabled={turn !== "player1" || (allTokenUsed["player1"] > 1 && allTokenUsed["player1"] < 3)}> 2 </button>}
+            disabled={turn !== CONSTANT.player1 || (allTokenUsed[CONSTANT.player1] > 1 && allTokenUsed[CONSTANT.player1] < 3)}> 2 </button>}
 
-          {allTokenUsed["player1"] > 1 && <button
+          {allTokenUsed[CONSTANT.player1] > 1 && <button
             className={`card-button left ${isChosen[2] ? "chosen" : ""} `}
             onClick={() => chooseOne(3)}
-            disabled={turn !== "player1"}> 3</button>}
+            disabled={turn !== CONSTANT.player1}> 3</button>}
         </aside>
 
         <section className='main-container'>
@@ -58,17 +63,17 @@ const Main = () => {
           <button
             className={`card-button right ${isChosen[0] ? "chosen" : ""} `}
             onClick={() => chooseOne(1)}
-            disabled={turn !== "player2" || (allTokenUsed["player2"] > 0 && allTokenUsed["player2"] < 3)}> 1 </button>
+            disabled={turn !== CONSTANT.player2 || (allTokenUsed[CONSTANT.player2] > 0 && allTokenUsed[CONSTANT.player2] < 3)}> 1 </button>
 
-          {allTokenUsed["player2"] > 0 && <button
+          {allTokenUsed[CONSTANT.player2] > 0 && <button
             className={`card-button right ${isChosen[1] ? "chosen" : ""} `}
             onClick={() => chooseOne(2)}
-            disabled={turn !== "player2" || (allTokenUsed["player2"] > 1 && allTokenUsed["player2"] < 3)}> 2 </button>}
+            disabled={turn !== CONSTANT.player2 || (allTokenUsed[CONSTANT.player2] > 1 && allTokenUsed[CONSTANT.player2] < 3)}> 2 </button>}
 
-          {allTokenUsed["player2"] > 1 && <button
+          {allTokenUsed[CONSTANT.player2] > 1 && <button
             className={`card-button right ${isChosen[2] ? "chosen" : ""} `}
             onClick={() => chooseOne(3)}
-            disabled={turn !== "player2"}> 3</button>}
+            disabled={turn !== CONSTANT.player2}> 3</button>}
         </aside>
       </main>
     </>

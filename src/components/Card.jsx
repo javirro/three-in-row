@@ -1,11 +1,9 @@
 
 import { verifyIfAllTokensMoved, addNewTokenToMap, moveTokenFromOtherPosition } from '../helpers/helper'
+import CONSTANT from '../constants'
 import '../styles/card.css'
 
 const Card = ({ tokenPositionNumber, turn, setTurn, isChosen, allTokenUsed, setAllTokenUsed, positions, setPositions }) => {
-  // Mpa formed with:
-  // key: Position in the MAP (1 - 9)
-  // Value: Object { player, tokenToMove (1-3)}
 
   const move = (tokenPositionNumber) => {
 
@@ -20,14 +18,14 @@ const Card = ({ tokenPositionNumber, turn, setTurn, isChosen, allTokenUsed, setA
     } else throw new Error('This field in the table is ocuppied.')
 
     setAllTokenUsed( s=> ({...s, [turn]: s[turn] +1}))
-    setTurn(turn === "player1" ? "player2" : "player1")
+    setTurn(turn === CONSTANT.player1 ? CONSTANT.player2 : CONSTANT.player1)
   }
 
   const getClassName = () => {
     if (positions.has(tokenPositionNumber)) {
       const player = positions.get(tokenPositionNumber).player
-      if (player === "player1") return "card-button left"
-      else if (player === "player2") return "card-button right"
+      if (player === CONSTANT.player1) return "card-button left"
+      else if (player === CONSTANT.player2) return "card-button right"
       else return "card-button"
     } else return "card-button"
   }
