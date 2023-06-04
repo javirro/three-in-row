@@ -3,7 +3,7 @@ import "../styles/winModal.css"
 
 const WinModal = ({ winner, setWinner }) => {
   return (
-    <div className="modal">
+    <div id="win-modal" className="modal">
       <div className="modal-content">
         <header>
           <h2> 🥇 Congratulations {winner === CONSTANT.player1 ? "Player 1" : "Player 2"} !</h2>
