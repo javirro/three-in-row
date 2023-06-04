@@ -17,7 +17,7 @@ const Main = () => {
 
   const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-  const chooseOne = (number) => {
+  const chooseOne = number => {
     const newChosen = [false, false, false]
     newChosen[number - 1] = true
     setIsChosen(newChosen)
@@ -68,7 +68,7 @@ const Main = () => {
         </aside>
 
         <section className="main-container">
-          {buttons.map((number) => (
+          {buttons.map(number => (
             <Card
               tokenPositionNumber={number}
               turn={turn}

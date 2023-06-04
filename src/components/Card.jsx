@@ -3,7 +3,7 @@ import CONSTANT from "../constants"
 import "../styles/card.css"
 
 const Card = ({ tokenPositionNumber, turn, setTurn, isChosen, allTokenUsed, setAllTokenUsed, positions, setPositions }) => {
-  const move = (tokenPositionNumber) => {
+  const move = tokenPositionNumber => {
     if (!positions.has(tokenPositionNumber)) {
       // This position in MAP is still empty
       if (verifyIfAllTokensMoved(turn, allTokenUsed)) {
@@ -15,7 +15,7 @@ const Card = ({ tokenPositionNumber, turn, setTurn, isChosen, allTokenUsed, setA
       }
     } else throw new Error("This field in the table is ocuppied.")
 
-    setAllTokenUsed((s) => ({ ...s, [turn]: s[turn] + 1 }))
+    setAllTokenUsed(s => ({ ...s, [turn]: s[turn] + 1 }))
     setTurn(turn === CONSTANT.player1 ? CONSTANT.player2 : CONSTANT.player1)
   }
 

@@ -1,6 +1,6 @@
 import CONSTANT from "../constants"
 
-const calculateWinner = (positions) => {
+const calculateWinner = positions => {
   const matrixCombinations = [
     [1, 2, 3],
     [4, 5, 6],
@@ -19,13 +19,13 @@ const calculateWinner = (positions) => {
 const horinzontalCombination = (positions, matrixCombinations) => {
   let players = []
   let winner
-  matrixCombinations.forEach((horizontal) => {
+  matrixCombinations.forEach(horizontal => {
     for (const i of horizontal) {
       const value = positions.get(i)
       players.push(value ? value.player : undefined)
     }
-    if (players.every((player) => player === CONSTANT.player1)) winner = CONSTANT.player1
-    else if (players.every((player) => player === CONSTANT.player2)) winner = CONSTANT.player2
+    if (players.every(player => player === CONSTANT.player1)) winner = CONSTANT.player1
+    else if (players.every(player => player === CONSTANT.player2)) winner = CONSTANT.player2
     else if (!winner) {
       winner = undefined
       players = []
@@ -35,13 +35,13 @@ const horinzontalCombination = (positions, matrixCombinations) => {
   return winner
 }
 
-const invertColumsToRows = (matrixCombinations) => {
+const invertColumsToRows = matrixCombinations => {
   const itemsNumber = matrixCombinations.length
   const newCombinations = []
   for (let i = 0; i < itemsNumber; i++) {
     newCombinations.push([])
   }
-  matrixCombinations.forEach((row) => {
+  matrixCombinations.forEach(row => {
     row.forEach((number, index) => {
       newCombinations[index].push(number)
     })
@@ -49,7 +49,7 @@ const invertColumsToRows = (matrixCombinations) => {
   return newCombinations
 }
 
-const getDiagonals = (matrixCombinations) => {
+const getDiagonals = matrixCombinations => {
   const mainDiagonal = matrixCombinations.map((row, i) => row[i])
   const inverseDiagonal = matrixCombinations.map((row, i) => row[row.length - 1 - i])
   return [mainDiagonal, inverseDiagonal]
