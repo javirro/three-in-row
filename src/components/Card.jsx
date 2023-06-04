@@ -1,22 +1,29 @@
+
 import { verifyIfAllTokensMoved, addNewTokenToMap, moveTokenFromOtherPosition } from "../helpers/helper"
+import { OccupiedError } from "../Errors/CustomizeError"
 import CONSTANT from "../constants"
 import "../styles/card.css"
 
-const Card = ({ tokenPositionNumber, turn, setTurn, isChosen, allTokenUsed, setAllTokenUsed, positions, setPositions }) => {
+const Card = ({ tokenPositionNumber, turn, isChosen, allTokenUsed, setAllTokenUsed, positions, setPositions, setShowError }) => {
   const move = tokenPositionNumber => {
-    if (!positions.has(tokenPositionNumber)) {
-      // This position in MAP is still empty
-      if (verifyIfAllTokensMoved(turn, allTokenUsed)) {
-        const newPositions = addNewTokenToMap(tokenPositionNumber, positions, isChosen, turn)
-        setPositions(newPositions)
-      } else {
-        const newPositions = moveTokenFromOtherPosition(positions, isChosen, turn, tokenPositionNumber)
-        setPositions(newPositions)
-      }
-    } else throw new Error("This field in the table is ocuppied.")
+    try {
+      if (!positions.has(tokenPositionNumber)) {
+        // This position in MAP is still empty
+        if (verifyIfAllTokensMoved(turn, allTokenUsed)) {
+          const newPositions = addNewTokenToMap(tokenPositionNumber, positions, isChosen, turn)
+          setPositions(newPositions)
+        } else {
+          const newPositions = moveTokenFromOtherPosition(positions, isChosen, turn, tokenPositionNumber)
+          setPositions(newPositions)
+        }
+      } else throw new OccupiedError("This field in the table is ocuppied.")
 
-    setAllTokenUsed(s => ({ ...s, [turn]: s[turn] + 1 }))
-    setTurn(turn === CONSTANT.player1 ? CONSTANT.player2 : CONSTANT.player1)
+      setAllTokenUsed(s => ({ ...s, [turn]: s[turn] + 1 }))
+
+    } catch (error) {
+      setShowError(error)
+    }
+
   }
 
   const getClassName = () => {
@@ -29,9 +36,11 @@ const Card = ({ tokenPositionNumber, turn, setTurn, isChosen, allTokenUsed, setA
   }
 
   return (
+    <>
     <button key={tokenPositionNumber} className={getClassName()} onClick={() => move(tokenPositionNumber)}>
       {positions.has(tokenPositionNumber) ? positions.get(tokenPositionNumber).tokenToMove : "X"}
     </button>
+    </>
   )
 }
 

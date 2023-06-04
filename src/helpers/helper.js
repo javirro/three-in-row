@@ -1,3 +1,4 @@
+import { SelectedError } from "../Errors/CustomizeError"
 // True if the player who is playing now has moved all the tokens previously.
 // False if the player who is playing now has NOT moved all the tokens previously.
 
@@ -9,14 +10,14 @@ export const verifyIfAllTokensMoved = (turn, allTokenUsed) => {
 export const addNewTokenToMap = (positionInMap, currentPositions, isChosen, turn) => {
   const newPosition = new Map(currentPositions)
   const tokenToMove = isChosen.indexOf(true) + 1
-  if (tokenToMove === 0) throw new Error("Must select one token to play with")
+  if (tokenToMove === 0) throw new SelectedError("Must select one token to play with")
   newPosition.set(positionInMap, { player: turn, tokenToMove })
   return newPosition
 }
 
 export const moveTokenFromOtherPosition = (currentPositions, isChosen, turn, newPositionForToken) => {
   const tokenToMove = isChosen.indexOf(true) + 1
-  if (tokenToMove === 0) throw new Error("Must select one token to play with")
+  if (tokenToMove === 0) throw new SelectedError("Must select one token to play with")
   let positionToRemoveFromMap // First step is to remove the position for the tokenToMove.
   currentPositions.forEach((value, key) => {
     if (value.tokenToMove === tokenToMove && value.player === turn) {
