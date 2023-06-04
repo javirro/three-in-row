@@ -1,4 +1,3 @@
-
 import { verifyIfAllTokensMoved, addNewTokenToMap, moveTokenFromOtherPosition } from "../helpers/helper"
 import { OccupiedError } from "../Errors/CustomizeError"
 import CONSTANT from "../constants"
@@ -20,11 +19,9 @@ const Card = ({ tokenPositionNumber, turn, isChosen, allTokenUsed, setAllTokenUs
       } else throw new OccupiedError("This field in the table is ocuppied.")
 
       setAllTokenUsed(s => ({ ...s, [turn]: s[turn] + 1 }))
-
     } catch (error) {
       setShowError(error)
     }
-
   }
 
   // Returns the correct claseName for Table button to show what players has put their tokens in a specific position.
@@ -39,9 +36,9 @@ const Card = ({ tokenPositionNumber, turn, isChosen, allTokenUsed, setAllTokenUs
 
   return (
     <>
-    <button key={tokenPositionNumber} className={getClassName()} onClick={() => move(tokenPositionNumber)}>
-      {positions.has(tokenPositionNumber) ? positions.get(tokenPositionNumber).tokenToMove : "X"}
-    </button>
+      <button key={tokenPositionNumber} className={getClassName()} onClick={() => move(tokenPositionNumber)}>
+        {positions.has(tokenPositionNumber) ? positions.get(tokenPositionNumber).tokenToMove : "X"}
+      </button>
     </>
   )
 }

@@ -1,34 +1,47 @@
 .flex-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 80px;
 }
 
 .main-container {
-  margin-top: 100px;
-  display: grid;
-  place-items: center;
-  grid-template-columns: repeat(3, 150px);
-  gap: 15px;
-  padding: 50px;
-  outline: 40px solid black;
-  border-radius: 10px;
+    margin-top: 100px;
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(3, 150px);
+    gap: 15px;
+    padding: 50px;
+    outline: 40px solid black;
+    border-radius: 10px;
 }
 
 .player {
-  border: 2px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 5px;
-  padding: 30px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    border: 3px solid black;
+    border-radius: 5px;
+    padding: 30px 20px;
 }
 
 h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.red {
+    display: inline-block;
+    margin-left: 5px;
+    color: rgb(249, 117, 117);
+}
+
+.blue {
+    display: inline-block;
+    margin-left: 5px;
+    color: rgb(117, 198, 249);
 }

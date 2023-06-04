@@ -1,5 +1,3 @@
-
-
 const createErrorFactory = function (name) {
   return class PlayerError extends Error {
     constructor(message) {

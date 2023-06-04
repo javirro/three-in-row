@@ -2,7 +2,6 @@ import CONSTANT from "../constants"
 import "../styles/winModal.css"
 
 const WinModal = ({ winner, setWinner, setAllTokenUsed, setPositions }) => {
-
   const playAgain = () => {
     setAllTokenUsed({ player1: 0, player2: 0 })
     setPositions(new Map())

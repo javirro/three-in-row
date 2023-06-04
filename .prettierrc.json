@@ -8,7 +8,7 @@
   "jsxSingleQuote": false,
   "bracketSameLine": false,
   "arrowParens": "avoid",
-  "htmlWhitespaceSensitivity": "css",
+  "htmlWhitespaceSensitivity": "ignore",
   "singleAttributePerLine": false
 
 }
