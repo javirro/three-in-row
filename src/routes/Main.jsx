@@ -44,7 +44,7 @@ const Main = () => {
     <>
       <h1>Turn: {turn}</h1>
       <main className="flex-container">
-        {winner && <WinModal player={winner} setWinner={setWinner} />}
+        {winner && <WinModal winner={winner} setWinner={setWinner} />}
         {showError && <ErrorModal player={turn} error={showError}  setShowError={setShowError}/>}
         <aside className="player">
           <h2>Player 1</h2>
