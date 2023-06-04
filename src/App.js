@@ -1,9 +1,7 @@
-import Main from './routes/Main';
+import Main from "./routes/Main"
 
 function App() {
-  return (
-      <Main />
-  );
+  return <Main />
 }
 
-export default App;
+export default App
