@@ -40,12 +40,13 @@ const Main = () => {
     setTurn(s => s === CONSTANT.player1 ? CONSTANT.player2 : CONSTANT.player1)
   }, [positions])
 
+
   return (
     <>
       <h1>Turn: {turn}</h1>
       <main className="flex-container">
-        {winner && <WinModal winner={winner} setWinner={setWinner} />}
-        {showError && <ErrorModal player={turn} error={showError}  setShowError={setShowError}/>}
+        {winner && <WinModal winner={winner} setWinner={setWinner}  setPositions={setPositions} setAllTokenUsed={setAllTokenUsed}/>}
+        {showError && <ErrorModal player={turn} error={showError} setShowError={setShowError} />}
         <aside className="player">
           <h2>Player 1</h2>
           <button
