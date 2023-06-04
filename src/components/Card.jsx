@@ -4,6 +4,7 @@ import { OccupiedError } from "../Errors/CustomizeError"
 import CONSTANT from "../constants"
 import "../styles/card.css"
 
+// One of this component for each of the 9 table buttons.
 const Card = ({ tokenPositionNumber, turn, isChosen, allTokenUsed, setAllTokenUsed, positions, setPositions, setShowError }) => {
   const move = tokenPositionNumber => {
     try {
@@ -26,6 +27,7 @@ const Card = ({ tokenPositionNumber, turn, isChosen, allTokenUsed, setAllTokenUs
 
   }
 
+  // Returns the correct claseName for Table button to show what players has put their tokens in a specific position.
   const getClassName = () => {
     if (positions.has(tokenPositionNumber)) {
       const player = positions.get(tokenPositionNumber).player

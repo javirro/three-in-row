@@ -16,6 +16,7 @@ const calculateWinner = positions => {
   return undefined
 }
 
+// Returns the winner (player1/player2) or undefined in case nobody satisfies the condition.
 const horinzontalCombination = (positions, matrixCombinations) => {
   let players = []
   let winner
@@ -35,6 +36,7 @@ const horinzontalCombination = (positions, matrixCombinations) => {
   return winner
 }
 
+// Permit obtain the columns as rows
 const invertColumsToRows = matrixCombinations => {
   const itemsNumber = matrixCombinations.length
   const newCombinations = []
@@ -49,6 +51,7 @@ const invertColumsToRows = matrixCombinations => {
   return newCombinations
 }
 
+// Permit obtain both diagonals as rows.
 const getDiagonals = matrixCombinations => {
   const mainDiagonal = matrixCombinations.map((row, i) => row[i])
   const inverseDiagonal = matrixCombinations.map((row, i) => row[row.length - 1 - i])

@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react"
 import Card from "../components/Card"
 import CONSTANT from "../constants"
-import "../styles/main.css"
 import WinModal from "../components/WinModal"
 import calculateWinner from "../helpers/calculateWinner"
 import ErrorModal from "../components/ErrorModal"
+import "../styles/main.css"
+
+/*
+positions Map formed with:   // key: Position in the MAP (1 - 9)  // Value: Object { player, tokenToMove (1-3)}
+isChosen: used to select what of the tokens (1, 2, 3) is used to each user. Chosen token is set as true.
+allTokenUsed: is an object which increase it values in each turn. When each value is >= 3 means that the users have moved the 3 tokens.
+winner: saves the winner for the game.
+showError: if it is undefined there is not error. In case of error, we store in that state the value.
+*/
 
 const Main = () => {
   const [turn, setTurn] = useState(CONSTANT.player1)
@@ -12,10 +20,7 @@ const Main = () => {
   const [allTokenUsed, setAllTokenUsed] = useState({ player1: 0, player2: 0 })
   const [positions, setPositions] = useState(new Map())
   const [winner, setWinner] = useState(undefined)
-  const [showError, setShowError] = useState(false)
-  // Map formed with:
-  // key: Position in the MAP (1 - 9)
-  // Value: Object { player, tokenToMove (1-3)}
+  const [showError, setShowError] = useState(undefined)
 
   const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
