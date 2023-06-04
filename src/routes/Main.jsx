@@ -3,6 +3,7 @@ import Card from '../components/Card'
 import CONSTANT from '../constants'
 import '../styles/main.css'
 import WinModal from '../components/WinModal'
+import calculateWinner from '../helpers/calculateWinner'
 
 const Main = () => {
   const [turn, setTurn] = useState(CONSTANT.player1)
@@ -10,7 +11,6 @@ const Main = () => {
   const [allTokenUsed, setAllTokenUsed] = useState({ player1: 0, player2: 0 })
   const [positions, setPositions] = useState(new Map())
   const [winner, setWinner] = useState(undefined)
-  const [finishModal, setFinishModal] = useState(true)
   // Map formed with:
   // key: Position in the MAP (1 - 9)
   // Value: Object { player, tokenToMove (1-3)}
@@ -27,11 +27,16 @@ const Main = () => {
     setIsChosen([false, false, false])
   }, [turn])
 
+  useEffect(() => {
+    const result = calculateWinner(positions)
+    if (result) setWinner(result)
+  }, [positions])
+
   return (
     <>
       <h1>Turn: {turn}</h1>
       <main className="flex-container">
-        {finishModal && <WinModal player={CONSTANT.player1} setFinishModal={setFinishModal} />}
+        {winner && <WinModal player={winner} setWinner={setWinner} />}
         <aside className='player'>
           <h2>Player 1</h2>
           <button

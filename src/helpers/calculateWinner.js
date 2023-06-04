@@ -1,46 +1,57 @@
-import CONSTANT from "../constants";
+import CONSTANT from "../constants"
 
-const matrixCombinations = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
-];
 const calculateWinner = (positions) => {
-  const horizontal = horinzontalCombination(positions)
+  const matrixCombinations = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+  ]
+  const horizontal = horinzontalCombination(positions, matrixCombinations)
   if (horizontal) return horizontal
+  const invertedMatrix = invertColumsToRows(matrixCombinations)
+  const vertical = horinzontalCombination(positions, invertedMatrix)
+  if (vertical) return vertical
+  const diagonal = horinzontalCombination(positions, getDiagonals(matrixCombinations))
+  if (diagonal) return diagonal
+  return undefined
+}
 
-};
-
-const horinzontalCombination = (positions) => {
-  let players = [];
+const horinzontalCombination = (positions, matrixCombinations) => {
+  let players = []
+  let winner
   matrixCombinations.forEach((horizontal) => {
     for (const i of horizontal) {
-      const value = positions.get(i);
-      if (value) players.push(value.player);
+      const value = positions.get(i)
+      players.push(value ? value.player : undefined)
     }
-  });
-
-  if (players.every((player) => player === CONSTANT.player1))
-    return CONSTANT.player1;
-  else if (players.every((player) => player === CONSTANT.player2))
-    return CONSTANT.player2;
-  else return null;
-};
-
-const verticalCombination = (positions) => {
-  let players = [];
-  let verticalCombinations = []
-
-  matrixCombinations.forEach((horizontal) => {
-    for (const i of horizontal) {
-      verticalCombinations[horizontal.indexOf(i)].push(positions.get(i));
+    if (players.every((player) => player === CONSTANT.player1)) winner = CONSTANT.player1
+    else if (players.every((player) => player === CONSTANT.player2)) winner = CONSTANT.player2
+    else if (!winner) {
+      winner = undefined
+      players = []
     }
-  });
+    players = []
+  })
+  return winner
+}
 
-  if (players.every((player) => player === CONSTANT.player1))
-    return CONSTANT.player1;
-  else if (players.every((player) => player === CONSTANT.player2))
-    return CONSTANT.player2;
-  else return null;
-};
-export default calculateWinner;
+const invertColumsToRows = (matrixCombinations) => {
+  const itemsNumber = matrixCombinations.length
+  const newCombinations = []
+  for (let i = 0; i < itemsNumber; i++) {
+    newCombinations.push([])
+  }
+  matrixCombinations.forEach((row) => {
+    row.forEach((number, index) => {
+      newCombinations[index].push(number)
+    })
+  })
+  return newCombinations
+}
+
+const getDiagonals = (matrixCombinations) => {
+  const mainDiagonal = matrixCombinations.map((row, i) => row[i])
+  const inverseDiagonal = matrixCombinations.map((row, i) => row[row.length - 1 - i])
+  return [mainDiagonal, inverseDiagonal]
+}
+export default calculateWinner
