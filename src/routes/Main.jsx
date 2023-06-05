@@ -21,8 +21,9 @@ const Main = () => {
   const [positions, setPositions] = useState(new Map())
   const [winner, setWinner] = useState(undefined)
   const [showError, setShowError] = useState(undefined)
-
   const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  console.log("games", localStorage.getItem("games"))
+  console.log("wins1", localStorage.getItem("player1Wins"))
 
   const chooseOne = number => {
     const newChosen = [false, false, false]
@@ -36,15 +37,26 @@ const Main = () => {
 
   useEffect(() => {
     const result = calculateWinner(positions)
-    if (result) setWinner(result)
+    if (result) {
+      setWinner(result)
+      const currentGames = localStorage.getItem("games")
+      localStorage.setItem("games", currentGames ? Number(currentGames) + 1 : 1)
+      if (result === CONSTANT.player1) {
+        const wins1 = localStorage.getItem("player1Wins")
+        localStorage.setItem("player1Wins", wins1 ? Number(wins1) + 1 : 1)
+      } else {
+        const wins2 = localStorage.getItem("player2Wins")
+        localStorage.setItem("player2Wins", wins2 ? Number(wins2) + 1 : 1)
+      }
+    }
     setTurn(s => (s === CONSTANT.player1 ? CONSTANT.player2 : CONSTANT.player1))
   }, [positions])
 
   return (
     <>
-      <h1>
-        Turn -<span className={`${turn === CONSTANT.player1 ? "red" : "blue"}`}> {turn} </span>
-      </h1>
+      <header className="header-section">
+        <h1> Turn -<span className={`${turn === CONSTANT.player1 ? "red" : "blue"}`}> {turn} </span></h1>
+      </header>
       <main className="flex-container">
         {winner && <WinModal winner={winner} setWinner={setWinner} setPositions={setPositions} setAllTokenUsed={setAllTokenUsed} />}
         {showError && <ErrorModal player={turn} error={showError} setShowError={setShowError} />}
