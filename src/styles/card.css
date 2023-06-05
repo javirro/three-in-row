@@ -24,6 +24,16 @@
 
 @media (max-width: 400px) {
     .card-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid black;
+        color: black;
+    }
+}
+
+@media only screen and (max-height: 425px) and (orientation: landscape) {
+    .card-button {
         width: 40px;
         height: 40px;
         border-radius: 50%;
