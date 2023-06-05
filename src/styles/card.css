@@ -22,7 +22,7 @@
     background-color: initial;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 599px) {
     .card-button {
         width: 60px;
         height: 60px;
