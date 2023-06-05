@@ -16,15 +16,23 @@
     border-radius: 10px;
 }
 
-.player {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 5px;
-    border: 3px solid black;
-    border-radius: 5px;
-    padding: 30px 20px;
+.header-section {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(3, 400px);
+    gap: 80px
+}
+
+.played-games {
+    margin-top: 50px;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: 4px solid rgb(149, 165, 3);
+    border-radius: 4px;
+    background: linear-gradient(rgb(246, 254, 194), rgb(247, 229, 129));
+    box-shadow: 3px 3px 3px rgb(247, 229, 129);
 }
 
 h1 {
@@ -44,4 +52,15 @@ h1 {
     display: inline-block;
     margin-left: 5px;
     color: rgb(117, 198, 249);
+}
+
+.player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    border: 3px solid black;
+    border-radius: 5px;
+    padding: 30px 20px;
 }

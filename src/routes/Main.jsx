@@ -22,8 +22,8 @@ const Main = () => {
   const [winner, setWinner] = useState(undefined)
   const [showError, setShowError] = useState(undefined)
   const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  console.log("games", localStorage.getItem("games"))
-  console.log("wins1", localStorage.getItem("player1Wins"))
+  const playedGames = localStorage.getItem("games") ?? 0
+
 
   const chooseOne = number => {
     const newChosen = [false, false, false]
@@ -39,8 +39,7 @@ const Main = () => {
     const result = calculateWinner(positions)
     if (result) {
       setWinner(result)
-      const currentGames = localStorage.getItem("games")
-      localStorage.setItem("games", currentGames ? Number(currentGames) + 1 : 1)
+      localStorage.setItem("games", localStorage.getItem("games") ? Number(localStorage.getItem("games")) + 1 : 1)
       if (result === CONSTANT.player1) {
         const wins1 = localStorage.getItem("player1Wins")
         localStorage.setItem("player1Wins", wins1 ? Number(wins1) + 1 : 1)
@@ -55,6 +54,9 @@ const Main = () => {
   return (
     <>
       <header className="header-section">
+        <div className="played-games">
+         Played games:  {playedGames}
+        </div>
         <h1> Turn -<span className={`${turn === CONSTANT.player1 ? "red" : "blue"}`}> {turn} </span></h1>
       </header>
       <main className="flex-container">
