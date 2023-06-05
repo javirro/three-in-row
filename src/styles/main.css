@@ -43,7 +43,7 @@
     display: grid;
     place-items: center;
     grid-template-columns: repeat(3, 400px);
-    gap: 80px
+    gap: 80px;
 }
 
 .played-games {
@@ -121,7 +121,7 @@ h1 {
     }
 }
 
-@media only screen and (max-height: 425px) and (orientation: landscape) {
+@media (min-width: 600px) and (max-width: 900px) {
     .flex-container {
         display: flex;
         justify-content: space-around;
@@ -136,6 +136,8 @@ h1 {
         padding: 20px;
         outline: 10px solid black;
         border-radius: 10px;
+        margin-bottom: 10px;
+        margin-top: 10px;
     }
     .player {
         flex-direction: column;
@@ -155,6 +157,7 @@ h1 {
         margin-top: 5px;
     }
     .played-games {
+        margin-top: 5px;
         padding: 5px 30px;
         font-size: 16px;
         font-weight: bold;
@@ -168,6 +171,7 @@ h1 {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: 5px;
         font-size: 25px;
     }
 }
