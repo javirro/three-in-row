@@ -150,7 +150,7 @@ h1 {
     .header-section {
         display: flex;
         justify-content: center;
-        align-items: start;
+        align-items: flex-start;
         gap: 15px;
         margin-top: 5px;
     }
