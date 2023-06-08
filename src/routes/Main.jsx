@@ -5,6 +5,7 @@ import WinModal from "../components/WinModal"
 import calculateWinner from "../helpers/calculateWinner"
 import ErrorModal from "../components/ErrorModal"
 import "../styles/main.css"
+import StartingTurnModal from "../components/StartingTurnModal"
 
 /*
 positions Map formed with:   // key: Position in the MAP (1 - 9)  // Value: Object { player, tokenToMove (1-3)}
@@ -15,7 +16,7 @@ showError: if it is undefined there is not error. In case of error, we store in 
 */
 
 const Main = () => {
-  const [turn, setTurn] = useState(CONSTANT.player1)
+  const [turn, setTurn] = useState(undefined)
   const [isChosen, setIsChosen] = useState([false, false, false])
   const [allTokenUsed, setAllTokenUsed] = useState({ player1: 0, player2: 0 })
   const [positions, setPositions] = useState(new Map())
@@ -23,7 +24,6 @@ const Main = () => {
   const [showError, setShowError] = useState(undefined)
   const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   const playedGames = localStorage.getItem("games") ?? 0
-
 
   const chooseOne = number => {
     const newChosen = [false, false, false]
@@ -48,18 +48,24 @@ const Main = () => {
         localStorage.setItem("player2Wins", wins2 ? Number(wins2) + 1 : 1)
       }
     }
-    setTurn(s => (s === CONSTANT.player1 ? CONSTANT.player2 : CONSTANT.player1))
+
+    setTurn(s => {
+      if(!s) return s
+      else return (s === CONSTANT.player1 ? CONSTANT.player2 : CONSTANT.player1)
+    })
   }, [positions])
+  // if (!turn) return <StartingTurnModal setTurn={setTurn} />
 
   return (
     <>
       <header className="header-section">
         <div className="played-games">
-         Played games:  {playedGames}
+          Played games:  {playedGames}
         </div>
         <h1> Turn -<span className={`${turn === CONSTANT.player1 ? "red" : "blue"}`}> {turn} </span></h1>
       </header>
       <main className="flex-container">
+        {!turn && <StartingTurnModal setTurn={setTurn} />}
         {winner && <WinModal winner={winner} setWinner={setWinner} setPositions={setPositions} setAllTokenUsed={setAllTokenUsed} />}
         {showError && <ErrorModal player={turn} error={showError} setShowError={setShowError} />}
         <aside className="player">
