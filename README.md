@@ -18,3 +18,8 @@ The page will reload when you make changes.\
 - Create the file: **.prettierrc.json**
 - Adding corresponding options. Check them : (https://prettier.io/docs/en/options.html)
 - Run the command: ```npx prettier --writte .\src```
+
+
+## Local storage
+
+In the local storage the number of games played and the winners of each player are safe.
