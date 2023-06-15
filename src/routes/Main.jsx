@@ -51,6 +51,7 @@ const Main = () => {
 
     setTurn(s => {
       if(!s) return s
+      if(result) return undefined
       else return (s === CONSTANT.player1 ? CONSTANT.player2 : CONSTANT.player1)
     })
   }, [positions])
